@@ -1,0 +1,111 @@
+<!-- STUDENT DASHBOARD -->
+<section
+  class="ftco-section ftco-dashboard ftco-no-pt ftco-no-pb"
+  style="--dash-color: #6f42c1; background-image: url(assets/images/bg_1.jpg);"
+  data-stellar-background-ratio="0.5"
+>
+  <div class="overlay"></div>
+
+  <div class="container py-5">
+
+    <!-- 🚫 Bloc d’accès refusé -->
+    <div *ngIf="notLoggedIn" class="alert alert-danger text-center p-4 rounded shadow">
+      <h4>🚫 Access Denied</h4>
+      <p>You must be logged in as a <strong>Student</strong> to access this dashboard.</p>
+      <p><a routerLink="/login" class="btn btn-outline-light mt-2">Go to Login</a></p>
+    </div>
+
+    <!-- ✅ Si connecté en tant qu'étudiant -->
+    <div *ngIf="!notLoggedIn">
+
+      <!-- Header -->
+      <div class="row justify-content-center">
+        <div class="col-md-10 text-center mb-5 heading-section ftco-animate">
+          <h2 class="mb-3 text-white">
+            Welcome to <span class="text-warning">Student Dashboard</span>
+          </h2>
+          <p class="text-light">
+            Access your courses, class, evaluations, and profile — all in one place.
+          </p>
+        </div>
+      </div>
+
+      <!-- ✅ Mini Stats -->
+      <div class="row justify-content-center text-center mb-4 text-white">
+        <div class="col-md-2 bg-primary rounded p-3 m-2 shadow">
+          <h6>📘 Courses</h6>
+          <p class="h4">{{ stats.courses }}</p>
+        </div>
+        <div class="col-md-2 bg-success rounded p-3 m-2 shadow">
+          <h6>🏫 Class</h6>
+          <p class="h4">{{ stats.class ? 1 : 0 }}</p>
+        </div>
+        <div class="col-md-2 bg-warning rounded p-3 m-2 shadow">
+          <h6>🧾 Evaluations</h6>
+          <p class="h4">{{ stats.evals }}</p>
+        </div>
+        <div class="col-md-2 bg-info rounded p-3 m-2 shadow">
+          <h6>👩‍🏫 Teachers</h6>
+          <p class="h4">{{ stats.teachers }}</p>
+        </div>
+      </div>
+
+      <!-- NAVIGATION -->
+      <div class="row justify-content-center mb-4 dashboard-section">
+        <div class="col-md-10">
+          <nav class="nav nav-tabs nav-fill bg-light rounded shadow-sm p-3 ftco-animate">
+            <a
+              class="nav-link text-dark"
+              routerLink="courses"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <i class="bi bi-journal-text text-primary"></i><br />
+              My Courses
+            </a>
+
+            <a
+              class="nav-link text-dark"
+              routerLink="class"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <i class="bi bi-people-fill text-success"></i><br />
+              My Class
+            </a>
+
+            <a
+              class="nav-link text-dark"
+              routerLink="evals"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <i class="bi bi-bar-chart-line text-warning"></i><br />
+              My Evaluations
+            </a>
+
+            <a
+              class="nav-link text-dark"
+              routerLink="profile"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <i class="bi bi-person-circle text-info"></i><br />
+              Profile
+            </a>
+          </nav>
+        </div>
+      </div>
+
+      <!-- ZONE DE CONTENU -->
+      <div class="row justify-content-center dashboard-section">
+        <div class="col-md-10 bg-white rounded p-4 shadow ftco-animate">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+

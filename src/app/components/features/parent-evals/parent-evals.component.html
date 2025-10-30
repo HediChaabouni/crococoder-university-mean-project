@@ -1,0 +1,34 @@
+<div class="container my-4">
+  <h3 class="mb-3">My Children’s Evaluations</h3>
+
+  <div *ngIf="loading" class="alert alert-info">Loading…</div>
+  <div *ngIf="errorMsg" class="alert alert-danger">{{ errorMsg }}</div>
+
+  <div class="table-responsive" *ngIf="!loading && !errorMsg && evals.length">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Child</th>
+          <th>Course</th>
+          <th>Teacher</th>
+          <th>Note</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of evals">
+          <td>{{ e.studentId?.firstName }} {{ e.studentId?.lastName }}</td>
+          <td>{{ e.courseId?.title }}</td>
+          <td>{{ e.teacherId?.firstName }} {{ e.teacherId?.lastName }}</td>
+          <td>{{ e.evalNote }}</td>
+          <td>{{ e.evalComment }}</td>
+          <td>{{ e.evalStatus ? 'Validated' : 'Pending' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="!loading && !errorMsg && !evals.length" class="text-muted">
+    No evaluations yet.
+  </div>
+</div>

@@ -1,0 +1,89 @@
+<!-- PARENT DASHBOARD HTML -->
+<section
+  class="ftco-section ftco-dashboard ftco-no-pt ftco-no-pb"
+  style="--dash-color: #fd7e14; background-image: url(assets/images/bg_5.jpg);"
+  data-stellar-background-ratio="0.5"
+>
+  <div class="overlay"></div>
+
+  <div class="container py-5">
+
+    <!-- 🚫 Si parent non connecté -->
+    <div *ngIf="notLoggedIn" class="alert alert-danger text-center p-4 rounded shadow">
+      <h4>🚫 Access Denied</h4>
+      <p>You must be logged in as a <strong>Parent</strong> to access this dashboard.</p>
+      <a routerLink="/login" class="btn btn-outline-light mt-2">Go to Login</a>
+    </div>
+
+    <!-- ✅ Si connecté -->
+    <div *ngIf="!notLoggedIn">
+
+      <!-- Titre principal -->
+      <div class="row justify-content-center">
+        <div class="col-md-10 text-center mb-5 heading-section ftco-animate">
+          <h2 class="mb-3 text-white">
+            Welcome to <span class="text-warning">Parent Dashboard</span>
+          </h2>
+          <p class="text-light">
+            Follow your children’s progress, find information, and manage your profile.
+          </p>
+        </div>
+      </div>
+
+      <!-- NAVIGATION -->
+      <div class="row justify-content-center mb-4 dashboard-section">
+        <div class="col-md-10">
+          <nav class="nav nav-tabs nav-fill bg-light rounded shadow-sm p-3 ftco-animate">
+            <a
+              class="nav-link text-dark"
+              routerLink="children"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <i class="bi bi-people-fill text-primary"></i><br />
+              Children List
+            </a>
+
+            <a
+              class="nav-link text-dark"
+              routerLink="evals"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <i class="bi bi-bar-chart-line text-warning"></i><br />
+              Children Evaluations
+            </a>
+
+            <a
+              class="nav-link text-dark"
+              routerLink="search"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <i class="bi bi-search text-success"></i><br />
+              Search Child
+            </a>
+
+            <a
+              class="nav-link text-dark"
+              routerLink="profile"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <i class="bi bi-person-circle text-info"></i><br />
+              Profile
+            </a>
+          </nav>
+        </div>
+      </div>
+
+      <!-- ZONE DE CONTENU -->
+      <div class="row justify-content-center dashboard-section">
+        <div class="col-md-10 bg-white rounded p-4 shadow ftco-animate">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

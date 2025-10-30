@@ -1,0 +1,15 @@
+
+<div class="container my-5">
+  <h2>Student Testimonials</h2>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let t of testimonials">
+      <div class="card mb-3">
+        <div class="card-body">
+          <p class="card-text">"{{ t.content }}"</p>
+          <h6 class="card-subtitle text-muted">— {{ t.student }}</h6>
+          <small class="text-secondary">{{ t.date | date }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

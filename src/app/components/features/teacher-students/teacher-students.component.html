@@ -1,0 +1,55 @@
+<!-- <div *ngIf="loading" class="text-center my-4">
+  <div class="spinner-border text-primary"></div>
+</div>
+
+<div *ngIf="!loading && students.length > 0; else noStudents">
+  <h4 class="mb-3">🎓 My Students</h4>
+  <table class="table table-bordered text-center">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Tel</th>
+    </tr>
+    <tr *ngFor="let s of students">
+      <td>{{ s.firstName }} {{ s.lastName }}</td>
+      <td>{{ s.email }}</td>
+      <td>{{ s.tel }}</td>
+    </tr>
+  </table>
+</div>
+
+<ng-template #noStudents>
+  <p class="text-center text-muted mt-4">No students assigned yet.</p>
+</ng-template> -->
+
+<div *ngIf="loading" class="text-center my-4">
+  <div class="spinner-border text-primary"></div>
+</div>
+
+<div *ngIf="!loading && students.length > 0; else noStudents">
+  <h4 class="mb-3 text-primary">🎓 My Students</h4>
+  <table class="table table-bordered text-center align-middle">
+    <thead class="table-primary">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Tel</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of students">
+        <td class="text-muted small">{{ s._id }}</td>
+        <td>{{ s.firstName }} {{ s.lastName }}</td>
+        <td>{{ s.email }}</td>
+        <td>{{ s.tel }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noStudents>
+  <p class="text-center text-muted mt-4">No students assigned yet.</p>
+</ng-template>
+
+

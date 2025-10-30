@@ -1,0 +1,67 @@
+<!-- ADMIN DASHBOARD HTML -->
+<section class="ftco-section ftco-dashboard ftco-no-pt ftco-no-pb"
+    style="--dash-color: #0d6efd; background-image: url(assets/images/course-2.jpg);"
+    data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10 text-center mb-5 heading-section ftco-animate">
+                <h2 class="mb-3 text-white">Welcome to <span class="text-warning">Admin Dashboard</span></h2>
+                <p class="text-light">Manage users, assignations, and your profile all in one place.</p>
+            </div>
+        </div>
+
+        <!-- Mini Stats -->
+        <div class="row justify-content-center text-center mb-4 text-white">
+            <div class="col-md-2 bg-primary rounded p-3 m-2 shadow">
+                <h5>👩‍🏫 Teachers</h5>
+                <p class="h4">{{ stats.teachers }}</p>
+            </div>
+            <div class="col-md-2 bg-success rounded p-3 m-2 shadow">
+                <h5>🎓 Students</h5>
+                <p class="h4">{{ stats.students }}</p>
+            </div>
+            <div class="col-md-2 bg-warning rounded p-3 m-2 shadow">
+                <h5>📚 Courses</h5>
+                <p class="h4">{{ stats.courses }}</p>
+            </div>
+            <div class="col-md-2 bg-info rounded p-3 m-2 shadow">
+                <h5>🏫 Classes</h5>
+                <p class="h4">{{ stats.classes }}</p>
+            </div>
+        </div>
+
+        <!-- NAVIGATION -->
+        <div class="row justify-content-center mb-4 dashboard-section">
+            <div class="col-md-10">
+                <nav class="nav nav-tabs nav-fill bg-light rounded shadow-sm p-2 ftco-animate">
+                    <a class="nav-link text-dark" routerLink="crud" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        <i class="bi bi-database-fill text-primary"></i><br />
+                        CRUD
+                    </a>
+
+                    <a class="nav-link text-dark" routerLink="assign" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        <i class="bi bi-diagram-3-fill text-success"></i><br />
+                        Assignations
+                    </a>
+
+                    <a class="nav-link text-dark" routerLink="profile" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        <i class="bi bi-person-circle text-info"></i><br />
+                        Profile
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- ZONE DE CONTENU -->
+        <div class="row justify-content-center dashboard-section">
+            <div class="col-md-10 bg-white rounded p-4 shadow ftco-animate">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</section>

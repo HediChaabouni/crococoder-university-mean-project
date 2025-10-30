@@ -1,0 +1,76 @@
+/* --- Overlay du fond (effet de transparence sur image) --- */
+.ftco-dashboard .overlay {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Espace en bas pour le dernier onglet */
+.dashboard-section:last-of-type {
+  margin-bottom: 2rem;
+}
+
+/* --- Navigation principale des onglets, transition douce pr les intractions --- */
+.nav-tabs .nav-link {
+  font-weight: 500;
+  color: #555;
+  border: none;
+  transition: all 0.3s ease;
+  padding: 1rem 1.5rem;
+  
+}
+
+/* Effet au survol, animation subtile */
+.nav-tabs .nav-link:hover {
+  color: var(--dash-color, #0d6efd);
+  background-color: #f8f9fa;
+  transform: translateY(-1px);
+}
+
+/* Lien actif */
+.nav-tabs .nav-link.active {
+  background-color: var(--dash-color, #0d6efd);
+  color: #fff !important;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 0.5rem rgba(13, 110, 253, 0.25);
+}
+
+/* Icônes du menu */
+.nav-tabs .nav-link i {
+  font-size: 1.5rem;
+}
+
+/* Harmonisation de la largeur du menu et du contenu */
+.dashboard-section .col-md-10 {
+  max-width: 1000px;
+  /* largeur fixe optionnelle */
+}
+
+/* Supprime les petits écarts visuels entre nav et contenu */
+.dashboard-section+.dashboard-section {
+  margin-top: -10px;
+  /* colle légèrement le contenu au nav */
+}
+
+/* Uniformise le padding et l’alignement + Arrondis et ombres harmonisés */
+.nav-tabs {
+  border-bottom: none;
+  border-radius: 0.5rem 0.5rem 0 0;
+  overflow: hidden;
+}
+
+/* Ajuste la largeur des onglets pour qu’ils occupent toute la ligne */
+.nav-tabs.nav-fill .nav-link {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+/* Style du contenu sous les onglets */
+.bg-white.rounded {
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+@media (max-width: 1200px) {
+  .dashboard-section .col-md-10 {
+    max-width: 95%;
+  }
+}

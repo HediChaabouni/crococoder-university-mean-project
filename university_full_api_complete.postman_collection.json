@@ -1,0 +1,385 @@
+{
+  "info": {
+    "name": "University Full API",
+    "_postman_id": "university-full-api-collection",
+    "description": "Full CRUD + Admin collection for University project",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Signup Student (form-data)",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "firstName",
+                  "value": "Alice",
+                  "type": "text"
+                },
+                {
+                  "key": "lastName",
+                  "value": "Student",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "alice@student.com",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "123456",
+                  "type": "text"
+                },
+                {
+                  "key": "tel",
+                  "value": "111222333",
+                  "type": "text"
+                },
+                {
+                  "key": "address",
+                  "value": "Paris",
+                  "type": "text"
+                },
+                {
+                  "key": "role",
+                  "value": "student",
+                  "type": "text"
+                },
+                {
+                  "key": "studentPhoto",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/signup-student",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "signup-student"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Signup Teacher (form-data)",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "firstName",
+                  "value": "John",
+                  "type": "text"
+                },
+                {
+                  "key": "lastName",
+                  "value": "Teacher",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "john@teacher.com",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "123456",
+                  "type": "text"
+                },
+                {
+                  "key": "tel",
+                  "value": "444555666",
+                  "type": "text"
+                },
+                {
+                  "key": "address",
+                  "value": "Lyon",
+                  "type": "text"
+                },
+                {
+                  "key": "role",
+                  "value": "teacher",
+                  "type": "text"
+                },
+                {
+                  "key": "teacherSpecialty",
+                  "value": "Maths",
+                  "type": "text"
+                },
+                {
+                  "key": "teacherCV",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/signup-teacher",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "signup-teacher"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Signup Parent (raw JSON)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"firstName\": \"Paul\", \"lastName\": \"Parent\", \"email\": \"paul@parent.com\", \"password\": \"123456\", \"tel\": \"777888999\", \"role\": \"parent\", \"address\": \"Marseille\", \"childTel\": \"111222333\"}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/signup-parent",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "signup-parent"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Signup Admin (raw JSON)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"firstName\": \"Admin\", \"lastName\": \"User\", \"email\": \"admin@uni.com\", \"password\": \"123456\", \"tel\": \"999888777\", \"role\": \"admin\", \"address\": \"Paris\"}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/signup-admin",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "signup-admin"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"admin@uni.com\", \"password\": \"123456\"}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "logout"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete All Users",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin CRUD",
+      "item": [
+        {
+          "name": "Get All Courses (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/courses",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "courses"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete All Courses (Admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/courses",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "courses"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Validate Teacher (Admin)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/validate-teacher/{{teacherId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "validate-teacher",
+                "{{teacherId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Assign Teacher to Course (Admin)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"teacherId\": \"{{teacherId}}\", \"courseId\": \"{{courseId}}\"}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/assign/teacher-course",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "assign",
+                "teacher-course"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

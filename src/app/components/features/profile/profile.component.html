@@ -1,0 +1,81 @@
+<div class="container mt-4">
+  <h3>Update Profile</h3>
+
+  <!-- message erreurs global -->
+  <div *ngIf="errorMsg" class="alert alert-danger">{{ errorMsg }}</div>
+
+  <form [formGroup]="profileForm" (ngSubmit)="updateProfile()" enctype="multipart/form-data">
+
+    <!-- FirstName / LastName -->
+    <div class="form-group mb-3">
+      <label>First Name</label>
+      <input type="text" class="form-control" formControlName="firstName" />
+    </div>
+
+    <div class="form-group mb-3">
+      <label>Last Name</label>
+      <input type="text" class="form-control" formControlName="lastName" />
+    </div>
+
+    <!-- Email -->
+    <div class="form-group mb-3">
+      <label>Email</label>
+      <input type="email" class="form-control" formControlName="email" />
+      <small class="text-danger" *ngIf="emailErrorMsg">{{ emailErrorMsg }}</small>
+    </div>
+
+    <!-- Tel -->
+    <div class="form-group mb-3">
+      <label>Phone</label>
+      <input type="text" class="form-control" formControlName="tel" />
+      <small class="text-danger" *ngIf="telErrorMsg">{{ telErrorMsg }}</small>
+    </div>
+
+    <!-- Address -->
+    <div class="form-group mb-3">
+      <label>Address</label>
+      <input type="text" class="form-control" formControlName="address" />
+    </div>
+
+    <!-- Password -->
+    <div class="form-group mb-3">
+      <label>New Password (optional)</label>
+      <input type="password" class="form-control" formControlName="password" />
+    </div>
+
+    <!-- Champs spécifiques Teacher -->
+    <div *ngIf="user.role === 'teacher'">
+      <div class="form-group mb-3">
+        <label>Specialty</label>
+        <input type="text" class="form-control" formControlName="teacherSpecialty" />
+      </div>
+
+      <div class="form-group mb-3">
+        <label>Upload CV</label>
+        <input type="file" class="form-control" (change)="onFileSelected($event, 'teacherCV')" />
+      </div>
+    </div>
+
+    <!-- Champs spécifiques Student -->
+    <div *ngIf="user.role === 'student'">
+      <div class="form-group mb-3">
+        <label>Upload Photo</label>
+        <input type="file" class="form-control" (change)="onFileSelected($event, 'studentPhoto')" />
+      </div>
+    </div>
+
+    <!-- Champs spécifiques Parent -->
+    <div *ngIf="user.role === 'parent'">
+      <div class="form-group mb-3">
+        <label>Child Phone (read only)</label>
+        <input type="text" class="form-control" formControlName="childTel" />
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <button class="btn btn-primary mt-3" [disabled]="profileForm.invalid">
+      Update Profile
+    </button>
+  </form>
+</div>
+

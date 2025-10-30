@@ -1,0 +1,51 @@
+<!-- <div *ngIf="loading" class="text-center my-4">
+  <div class="spinner-border text-success"></div>
+</div>
+
+<div *ngIf="!loading && classes.length > 0; else noClasses">
+  <h4 class="mb-3">🏫 My Classes</h4>
+  <table class="table table-bordered text-center">
+    <tr>
+      <th>Class Name</th>
+      <th>Year</th>
+    </tr>
+    <tr *ngFor="let c of classes">
+      <td>{{ c.className }}</td>
+      <td>{{ c.classYear }}</td>
+    </tr>
+  </table>
+</div>
+
+<ng-template #noClasses>
+  <p class="text-center text-muted mt-4">No classes assigned yet.</p>
+</ng-template> -->
+<!-- END TEACHER CLASSES COMPONENT -->
+
+<div *ngIf="loading" class="text-center my-4">
+  <div class="spinner-border text-success"></div>
+</div>
+
+<div *ngIf="!loading && classes.length > 0; else noClasses">
+  <h4 class="mb-3 text-success">🏫 My Classes</h4>
+  <table class="table table-bordered text-center align-middle">
+    <thead class="table-success">
+      <tr>
+        <th>ID</th>
+        <th>Class Name</th>
+        <th>Year</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of classes">
+        <td class="text-muted small">{{ c._id }}</td>
+        <td>{{ c.className }}</td>
+        <td>{{ c.classYear }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noClasses>
+  <p class="text-center text-muted mt-4">No classes assigned yet.</p>
+</ng-template>
+

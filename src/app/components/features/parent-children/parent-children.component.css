@@ -1,0 +1,12 @@
+table {
+  font-size: 0.95rem;
+}
+
+th {
+  background-color: #fff7ec;
+  color: #333;
+}
+
+img {
+  object-fit: cover;
+}
