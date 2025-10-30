@@ -1,0 +1,28 @@
+<div class="container my-4">
+  <h3 class="mb-3">My Class</h3>
+
+  <div *ngIf="loading" class="alert alert-info">Loading…</div>
+  <div *ngIf="errorMsg" class="alert alert-danger">{{ errorMsg }}</div>
+
+  <div *ngIf="!loading && !errorMsg && myClass">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ myClass.className }}</h5>
+        <p class="card-text">
+          Year: {{ myClass.classYear }}
+        </p>
+      </div>
+    </div>
+
+    <h5>Classmates</h5>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let s of classmates">
+        {{ s.firstName }} {{ s.lastName }} — <small>{{ s.email }}</small>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="!loading && !errorMsg && !myClass" class="text-muted">
+    No class assigned.
+  </div>
+</div>

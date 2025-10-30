@@ -1,0 +1,13 @@
+<div class="container my-5">
+    <h2>Dispensed Classes</h2>
+    <div class="row">
+        <div class="col-md-4" *ngFor="let class of classes">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ class.className }}</h5>
+                    <p class="card-text">{{ class.classYear }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

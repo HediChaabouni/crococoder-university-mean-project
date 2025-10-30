@@ -1,0 +1,37 @@
+<!-- START MAIN NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco-navbar-light w-100 shadow-sm" id="ftco-navbar"
+  style="position: relative; z-index: 999;">
+  <div class="container-fluid px-5">
+
+    <!-- Toggle button for mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#ftco-nav"
+      aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="oi oi-menu"></span> Menu
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse justify-content-between" id="ftco-nav">
+
+      <!-- 🧭 Menu aligné à gauche -->
+      <ul class="navbar-nav me-auto text-uppercase fw-semibold">
+        <li class="nav-item"><a class="nav-link px-3" routerLink="/" routerLinkActive="active">Home</a></li>
+        <li class="nav-item"><a class="nav-link px-3" routerLink="/staff" routerLinkActive="active">Staff & Resources</a></li>
+        <li class="nav-item"><a class="nav-link px-3" routerLink="/blog" routerLinkActive="active">Blog</a></li>
+        <li class="nav-item"><a class="nav-link px-3" routerLink="/testimonials" routerLinkActive="active">Testimonials</a></li>
+        <li class="nav-item"><a class="nav-link px-3" routerLink="/contact" routerLinkActive="active">Contact</a></li>
+                <li class="nav-item"><a class="nav-link px-3" routerLink="/about" routerLinkActive="active">About Us</a></li>
+      </ul>
+
+      <!-- 👤 Nom + photo alignés à droite -->
+      <div class="d-flex align-items-center">
+        <span *ngIf="userName" class="text-light me-2" style="margin-right:30px;">
+          👋 Bonjour, {{ userName }}
+        </span>
+        <img *ngIf="userPhoto" [src]="userPhoto" alt="Profile photo"
+          class="rounded-circle border border-light" width="40" height="40" />
+      </div>
+
+    </div>
+  </div>
+</nav>
+<!-- END MAIN NAVBAR -->

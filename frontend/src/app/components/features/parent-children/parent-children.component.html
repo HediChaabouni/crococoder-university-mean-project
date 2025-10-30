@@ -1,0 +1,38 @@
+<div *ngIf="msg" class="alert alert-info text-center">{{ msg }}</div>
+
+<div *ngIf="loading" class="text-center py-4">
+    <div class="spinner-border text-warning" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<div *ngIf="!loading && children.length > 0">
+    <h3 class="mb-3 text-warning text-center">Your Registered Children</h3>
+
+    <table class="table table-striped table-bordered align-middle shadow-sm">
+        <thead class="table-light text-center">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Tel</th>
+                <th>Class</th>
+                <th>Photo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let child of children">
+                <td>{{ child.firstName }} {{ child.lastName }}</td>
+                <td>{{ child.email }}</td>
+                <td>{{ child.tel }}</td>
+
+                <td>{{ getClassName(child) }}</td>
+                <td>{{ getClassYear(child) }}</td>
+
+                <td class="text-center">
+                    <img *ngIf="child.studentPhoto" [src]="child.studentPhoto" alt="Child photo"
+                        class="rounded-circle border" width="40" height="40" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

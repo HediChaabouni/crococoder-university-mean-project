@@ -1,0 +1,47 @@
+<div class="teachers-container container">
+
+  <!-- 🔍 Recherche -->
+  <div class="text-center mb-5">
+    <form #searchForm="ngForm" (ngSubmit)="onSearch(searchInput.value)"
+      class="d-flex justify-content-center align-items-center flex-wrap gap-3">
+      <input #searchInput="ngModel" type="text" name="specialty" ngModel placeholder="Search by specialty..."
+        class="form-control form-control-lg w-50" (input)="onSearch(searchInput.value)" />
+      <button type="submit" class="btn btn-lg btn-primary">Search</button>
+    </form>
+  </div>
+
+  <!-- Loader -->
+  <div *ngIf="loading" class="text-center py-4">
+    <div class="spinner-border text-primary"></div>
+  </div>
+
+  <!-- Message d’erreur -->
+  <div *ngIf="!loading && errorMsg" class="alert alert-danger text-center">{{ errorMsg }}</div>
+
+  <!-- ✅ Liste horizontale des enseignants -->
+  <div class="teachers-carousel" *ngIf="!loading && teachers.length > 0">
+    <div class="teacher-card ftco-animate" *ngFor="let t of teachers; trackBy: trackById">
+      <div class="teacher-img rounded-top mb-3" [style.background-image]="'url(' + fileUrl(t.teacherPhoto) + ')'"></div>
+      <div class="teacher-text flex-grow-1 text-center p-3">
+        <h5 class="text-primary mb-1 text-uppercase">
+          {{ t.firstName }} {{ t.lastName }}
+        </h5>
+        <h6 class="text-muted mb-2">{{ t.teacherSpecialty || 'No specialty provided' }}</h6>
+        <p class="small text-secondary">Dedicated and passionate teacher</p>
+        <div class="mt-auto">
+          <a *ngIf="t.teacherCV" [href]="fileUrl(t.teacherCV)" target="_blank" rel="noopener"
+            class="btn btn-sm btn-outline-primary px-3 py-2">
+            View CV
+          </a>
+          <span *ngIf="!t.teacherCV" class="text-muted small">No CV available</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Aucun teacher -->
+  <div *ngIf="!loading && teachers.length === 0" class="text-center text-muted mt-3">
+    No teachers found.
+  </div>
+
+</div>

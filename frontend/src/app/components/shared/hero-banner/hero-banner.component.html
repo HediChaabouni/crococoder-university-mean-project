@@ -1,0 +1,72 @@
+<!-- START BANNER -->
+<header class="ftco-header navbar-light bg-top w-100">
+  <div class="container-fluid px-5">
+    <div class="row align-items-center">
+
+      <!-- Logo -->
+      <div class="col-md-4 d-flex align-items-center py-3">
+        <a class="navbar-brand d-flex align-items-center" routerLink="/">
+          <img src="assets/images/BirdTeamLogo.png" alt="Bird Logo" class="logo-img me-2" />
+          <span class="brand-text">
+            Bird. <span class="sub">University</span>
+          </span>
+        </a>
+      </div>
+
+      <!-- Right side -->
+      <div class="col-md-8">
+        <div class="d-flex justify-content-end align-items-center flex-wrap gap-3">
+
+          <!-- Contact info -->
+          <div class="contact-info text-end me-4" style="margin-right: 350px;">
+            <div class="text">
+              <span class="info-title d-block fw-bold">Wanna get INFOS ?</span>
+              <span class="info-email d-block">Email: info@bird-university.com</span>
+              <span class="info-phone d-block">Call: +1235 2355 98</span>
+            </div>
+          </div>
+
+          <!-- ✅ Boutons Signup / Login (dynamiques) -->
+          <div class="d-flex align-items-center gap-2">
+
+            <!-- Signup : dropdown si non connecté, rôle sinon -->
+            <ng-container *ngIf="!userService.isLoggedIn()">
+              <div class="dropdown d-inline-block">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="signupDropdown"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  Signup
+                </button>
+                <div class="dropdown-menu" aria-labelledby="signupDropdown">
+                  <a class="dropdown-item" routerLink="/signup-student">Student</a>
+                  <a class="dropdown-item" routerLink="/signup-teacher">Teacher</a>
+                  <a class="dropdown-item" routerLink="/signup-parent">Parent</a>
+                  <a class="dropdown-item" routerLink="/signup-admin">Admin</a>
+                </div>
+              </div>
+            </ng-container>
+
+            <!-- ✅ Affichage du rôle si connecté -->
+            <a class="btn text-white px-4 py-2 fw-semibold" [ngClass]="{
+            'btn-student': role === 'student',
+            'btn-teacher': role === 'teacher',
+            'btn-parent': role === 'parent',
+            'btn-admin': role === 'admin'
+            }" *ngIf="userService.isLoggedIn()">
+              {{ role | titlecase }}
+            </a>
+            <!-- Login / Logout -->
+            <ng-container *ngIf="!userService.isLoggedIn(); else loggedInLogout">
+              <a class="btn btn-outline-primary" routerLink="/login" routerLinkActive="active">Login</a>
+            </ng-container>
+
+            <ng-template #loggedInLogout>
+              <button class="btn btn-danger" (click)="logout()">Logout</button>
+            </ng-template>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- END Banner -->

@@ -1,0 +1,54 @@
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h2>📝 My Evals</h2>
+  <button class="btn btn-outline-danger btn-sm" (click)="onDeleteAll()">Delete all my evals</button>
+</div>
+
+<div *ngIf="msg" class="alert text-center" [ngClass]="{
+       'alert-success': msg.startsWith('✅'),
+       'alert-danger': msg.startsWith('❌'),
+       'alert-warning': msg.startsWith('⚠️')
+     }">
+  {{ msg }}
+</div>
+
+<!-- ✅ Liste des évaluations -->
+<div *ngIf="!loading && evals && evals.length > 0; else noEvals" class="mt-4">
+  <h4 class="mb-3 text-success">📋 Evaluations List</h4>
+  <table class="table table-bordered text-center align-middle">
+    <thead class="table-success">
+      <tr>
+        <th>Course</th>
+        <th>Student</th>
+        <th>Class</th>
+        <th>Year</th>
+        <th>Note</th>
+        <th>Comment</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of evals">
+        <td>{{ e.courseId?.courseTitle || e.courseId }}</td>
+        <td>{{ e.studentId?.firstName }} {{ e.studentId?.lastName }}</td>
+        <td>{{ e.classId?.className || e.classId }}</td>
+        <td>{{ e.classId?.classYear || '—' }}</td>
+        <td><strong>{{ e.evalNote }}</strong></td>
+        <td>{{ e.evalComment }}</td>
+        <td>
+          <span class="badge" [ngClass]="e.evalStatus ? 'bg-success' : 'bg-secondary'">
+            {{ e.evalStatus ? 'Sucess' : 'Failure' }}
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-outline-primary btn-sm me-1" (click)="onEdit(e)">Edit</button>
+          <button class="btn btn-outline-danger btn-sm" (click)="onDelete(e._id!)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noEvals>
+  <div class="text-center text-muted mt-3">No evaluations yet.</div>
+</ng-template>

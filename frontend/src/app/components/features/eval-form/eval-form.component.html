@@ -1,0 +1,39 @@
+<form [formGroup]="evalForm" (ngSubmit)="submit()" class="card card-body mb-3">
+  <div class="row">
+    <div class="col-md-4 mb-2">
+      <label class="form-label">Note</label>
+      <input type="text" formControlName="evalNote" class="form-control" placeholder="ex: 15/20">
+    </div>
+    <div class="col-md-4 mb-2">
+      <label class="form-label">Status</label>
+      <select formControlName="evalStatus" class="form-control">
+        <option [ngValue]="true">Validée</option>
+        <option [ngValue]="false">En attente</option>
+      </select>
+    </div>
+    <div class="col-md-4 mb-2">
+      <label class="form-label">Course ID</label>
+      <input type="text" formControlName="courseId" class="form-control" placeholder="course _id">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label">Student ID</label>
+      <input type="text" formControlName="studentId" class="form-control" placeholder="student _id">
+    </div>
+    <div class="col-md-6 mb-2">
+      <label class="form-label">Class ID</label>
+      <input type="text" formControlName="classId" class="form-control" placeholder="class _id">
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <label class="form-label">Comment</label>
+    <textarea formControlName="evalComment" class="form-control" rows="2" placeholder="Feedback..."></textarea>
+  </div>
+
+  <button class="btn btn-success">
+    {{ evalData ? 'Update eval' : 'Add eval' }}
+  </button>
+</form>

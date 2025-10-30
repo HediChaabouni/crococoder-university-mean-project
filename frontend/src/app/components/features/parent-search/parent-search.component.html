@@ -1,0 +1,29 @@
+
+<div class="container my-4">
+  <h3 class="mb-3">Search My Child</h3>
+
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter child’s name or phone"
+      [(ngModel)]="query"
+    />
+    <div class="input-group-append">
+      <button class="btn btn-primary" (click)="onSearch()">Search</button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="alert alert-info">Searching…</div>
+  <div *ngIf="errorMsg" class="alert alert-danger">{{ errorMsg }}</div>
+
+  <ul class="list-group" *ngIf="!loading && !errorMsg && results.length">
+    <li class="list-group-item" *ngFor="let r of results">
+      {{ r.firstName }} {{ r.lastName }} — {{ r.tel }}
+    </li>
+  </ul>
+
+  <div *ngIf="!loading && !errorMsg && !results.length" class="text-muted">
+    No child found.
+  </div>
+</div>

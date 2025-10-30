@@ -1,0 +1,60 @@
+/* You can add global styles to this file, and also import other style files */
+.ftco-animate { 
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* --- Harmonisation Hero Banner + Navbar --- */
+.bg-top {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 0.75rem 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.bg-top .container,
+#ftco-navbar .container-fluid {
+  max-width: 100%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/* Espacement entre hero-banner et navbar */
+.ftco-navbar-light {
+  margin-top: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Transition fluide entre les deux zones */
+.bg-top + #ftco-navbar {
+  margin-top: -1px; /* évite la bande entre les deux blocs */
+}
+
+/* Fixe les paddings verticaux */
+.bg-top .row,
+#ftco-navbar {
+  align-items: center;
+}
+
+/* Uniformise les ombres pour continuité visuelle */
+#ftco-navbar {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  z-index: 999;
+}
+
+/* Responsive harmonisé */
+@media (max-width: 992px) {
+  .bg-top .text {
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  #ftco-navbar .navbar-collapse {
+    background-color: #212529;
+  }
+
+  .navbar-dark .navbar-nav .nav-link {
+    padding: 0.75rem 1rem;
+  }
+}
+
