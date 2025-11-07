@@ -33,12 +33,20 @@ export interface User {
   // Spécifiques Parent
   childTel?: string;
   childNumber?: number;
-  childIds?: string[];       // ids des enfants (Users)
+  childIds?: string[];       // ids des enfants d'un parent 
 
   // Relations générales
   courseIds?: string[];
   classIds?: (string | Class)[]; // ✅ peut être string ou Class selon le cas
   evalIds?: string[];
+
+  // Autres Relations spécifiques
+  parentId?: string;             // ✅ le parent de l’enfant
+  teacherIds?: string[];         // ✅ les enseignants du student
+  studentIds?: string[];         // ✅ les students du teacher
+
+   // Métadonnées facultatives
+  alreadyLinked?: 'you' | 'other' | null ;  // ✅ ajouté par le backend dans searchChild
 
   // Mongo
   createdAt?: string;

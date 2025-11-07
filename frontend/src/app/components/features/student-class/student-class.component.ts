@@ -10,7 +10,7 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class StudentClassComponent implements OnInit {
   myClass?: Class;
-  classmates: User[] = [];
+  classMates: User[] = [];
   loading = false;
   errorMsg = '';
 
@@ -20,17 +20,18 @@ export class StudentClassComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const studentId = localStorage.getItem('userId');
-    if (!studentId) {
+    const student = this.userService.getCurrentUser();
+    if (!student || student.role !== 'student') {
       this.errorMsg = 'No student connected.';
       return;
     }
+    
     this.loading = true;
     // Endpoint côté BE: GET /api/students/:id/class  → { class: {...}, classmates: [...] }
-    this.classService.getClassByStudent(studentId).subscribe({
+    this.classService.getClassByStudent(student._id).subscribe({
       next: (res: any) => {
         this.myClass = res.class;
-        this.classmates = res.classmates || [];
+        this.classMates = res.classmates || [];
       },
       error: (err) => (this.errorMsg = err.error?.message || 'Failed to load class'),
       complete: () => (this.loading = false)

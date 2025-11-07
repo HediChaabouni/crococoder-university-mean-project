@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Eval } from 'src/app/core/models/eval';
 import { EvalService } from 'src/app/core/services/eval.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-parent-evals',
@@ -11,22 +12,26 @@ export class ParentEvalsComponent implements OnInit {
   errorMsg = '';
   loading = false;
 
-  constructor(private evalService: EvalService) {}
+  constructor(
+    private evalService: EvalService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
-    const parentId = localStorage.getItem('userId');
-    if (!parentId) {
+    const parent = this.userService.getCurrentUser();
+    if (!parent || parent.role !== 'parent') {
       this.errorMsg = 'No parent connected.';
       return;
     }
 
     this.loading = true;
-    // Endpoint côté BE : GET /api/evals/parent/:parentId
-    this.evalService.getEvalsByParent(parentId).subscribe({
+    this.evalService.getEvalsByParent(parent._id).subscribe({
       next: (data) => (this.evals = data),
-      error: (err) => (this.errorMsg = err.error?.message || 'Failed to load evaluations'),
+      error: (err) =>
+        (this.errorMsg = err.error?.message || 'Failed to load evaluations'),
       complete: () => (this.loading = false)
     });
   }
 }
+
 

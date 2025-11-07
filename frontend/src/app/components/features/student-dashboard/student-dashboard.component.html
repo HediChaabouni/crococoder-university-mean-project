@@ -1,9 +1,6 @@
 <!-- STUDENT DASHBOARD -->
-<section
-  class="ftco-section ftco-dashboard ftco-no-pt ftco-no-pb"
-  style="--dash-color: #6f42c1; background-image: url(assets/images/bg_1.jpg);"
-  data-stellar-background-ratio="0.5"
->
+<section class="ftco-section ftco-dashboard ftco-no-pt ftco-no-pb"
+  style="--dash-color: #6f42c1; background-image: url(assets/images/bg_1.jpg);" data-stellar-background-ratio="0.5">
   <div class="overlay"></div>
 
   <div class="container py-5">
@@ -54,42 +51,32 @@
       <div class="row justify-content-center mb-4 dashboard-section">
         <div class="col-md-10">
           <nav class="nav nav-tabs nav-fill bg-light rounded shadow-sm p-3 ftco-animate">
-            <a
-              class="nav-link text-dark"
-              routerLink="courses"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-            >
+            <a class="nav-link text-dark" routerLink="student-courses" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">
               <i class="bi bi-journal-text text-primary"></i><br />
               My Courses
             </a>
 
-            <a
-              class="nav-link text-dark"
-              routerLink="class"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-            >
+            <a class="nav-link text-dark" routerLink="student-teachers" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">
+              <i class="bi bi-journal-text text-primary"></i><br />
+              My Teachers
+            </a>
+
+            <a class="nav-link text-dark" routerLink="student-class" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">
               <i class="bi bi-people-fill text-success"></i><br />
               My Class
             </a>
 
-            <a
-              class="nav-link text-dark"
-              routerLink="evals"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-            >
+            <a class="nav-link text-dark" routerLink="student-evals" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">
               <i class="bi bi-bar-chart-line text-warning"></i><br />
               My Evaluations
             </a>
 
-            <a
-              class="nav-link text-dark"
-              routerLink="profile"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-            >
+            <a class="nav-link text-dark" routerLink="profile" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">
               <i class="bi bi-person-circle text-info"></i><br />
               Profile
             </a>
@@ -107,5 +94,3 @@
     </div>
   </div>
 </section>
-
-

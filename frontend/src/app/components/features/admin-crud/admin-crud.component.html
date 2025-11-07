@@ -99,7 +99,7 @@
   <div *ngIf="selectedSection==='classes'">
     <h3>Classes</h3>
     <button class="btn btn-danger mb-2" (click)="deleteAllClasses()">Delete All Classes</button>
-        <!-- Class Table -->
+    <!-- Class Table -->
     <table class="table table-bordered">
       <tr>
         <th>Name</th>
@@ -113,23 +113,23 @@
       </tr>
     </table>
   </div>
-    <!-- Add Class -->
-    <div *ngIf="selectedSection==='classes'" class="mb-4">
-      <h3>Add Class</h3>
-      <form (ngSubmit)="onAddClass()" #classForm="ngForm" class="row g-2 align-items-end">
-        <div class="col-md-5">
-          <input type="text" class="form-control" placeholder="Class name" name="className"
-            [(ngModel)]="newClass.className" required>
-        </div>
-        <div class="col-md-5">
-          <input type="text" class="form-control" placeholder="Year" name="classYear" [(ngModel)]="newClass.classYear"
-            required>
-        </div>
-        <div class="col-md-2">
-          <button type="submit" class="btn btn-primary w-100">Add</button>
-        </div>
-      </form>
-    </div>
+  <!-- Add Class -->
+  <div *ngIf="selectedSection==='classes'" class="mb-4">
+    <h3>Add Class</h3>
+    <form (ngSubmit)="onAddClass()" #classForm="ngForm" class="row g-2 align-items-end">
+      <div class="col-md-5">
+        <input type="text" class="form-control" placeholder="Class name" name="className"
+          [(ngModel)]="newClass.className" required>
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-control" placeholder="Year" name="classYear" [(ngModel)]="newClass.classYear"
+          required>
+      </div>
+      <div class="col-md-2">
+        <button type="submit" class="btn btn-primary w-100">Add</button>
+      </div>
+    </form>
+  </div>
 
   <!-- Evals -->
   <div *ngIf="selectedSection==='evals'">
@@ -139,12 +139,16 @@
       <tr>
         <th>Student</th>
         <th>Course</th>
+        <th>Teacher</th>
         <th>Note</th>
+        <th>Status</th>
+        <th>Comment</th>
         <th>Actions</th>
       </tr>
       <tr *ngFor="let e of evals">
         <td>{{ e.studentId?.firstName }}</td>
         <td>{{ e.courseId?.title }}</td>
+        <td>{{ e.teacherId?.firstName }} {{ e.teacherId?.lastName }}</td>
         <td>{{ e.evalNote }}</td>
         <td>{{ e.evalStatus }}</td>
         <td>{{ e.evalComment }}</td>

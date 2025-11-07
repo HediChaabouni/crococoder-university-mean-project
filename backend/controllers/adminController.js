@@ -221,7 +221,7 @@ export const deleteAllUsers = async (req, res) => {
 /* ================= COURSES ================= */
 export const getAllCourses = async (req, res) => {
     try {
-        const courses = await Course.find().populate('teacherId');
+        const courses = await Course.find().populate('teacherIds');
         res.json(courses);
     } catch (e) {
         res.status(500).json({ message: e.message });

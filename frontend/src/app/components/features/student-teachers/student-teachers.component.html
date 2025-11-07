@@ -1,0 +1,21 @@
+<div class="container my-4">
+  <h3 class="mb-3">My Teachers</h3>
+
+  <div *ngIf="loading" class="alert alert-info">Loading…</div>
+  <div *ngIf="errorMsg" class="alert alert-danger">{{ errorMsg }}</div>
+
+  <div class="row" *ngIf="!loading && !errorMsg && teachers.length">
+    <div class="col-md-4 mb-3" *ngFor="let t of teachers">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ t.firstName }} {{ t.lastName }}</h5>
+          <p class="card-text">{{t.teacherSpecialty}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && !errorMsg && !teachers.length" class="text-muted">
+    No teachers assigned yet
+  </div>
+</div>

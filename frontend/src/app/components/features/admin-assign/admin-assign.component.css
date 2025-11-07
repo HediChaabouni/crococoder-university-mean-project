@@ -1,0 +1,114 @@
+/* =====================================================
+   🧩 LAYOUT GLOBAL
+===================================================== */
+.container-fluid {
+  max-width: 1400px;
+}
+
+/* ✅ Grille harmonisée : centrage + hauteur égale */
+.row.g-4 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch; /* étire toutes les colonnes à la même hauteur */
+}
+
+.row.g-4 > [class*="col-"] {
+  display: flex; /* chaque colonne est flex pour étirer sa card */
+}
+
+.row.g-4 > [class*="col-"] > .card {
+  flex: 1 1 auto;
+  height: 100%; /* la card remplit toute la hauteur */
+}
+
+/* =====================================================
+   💠 CARDS — Style unifié et harmonisé
+===================================================== */
+.card {
+  width: 100%;
+  min-height: 500px; /* ajuste ici selon ton rendu */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  border: none;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s ease-in-out;
+  padding: 1.5rem;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* =====================================================
+   🧭 CONTENU DES FORMULAIRES
+===================================================== */
+.card form {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Espacement cohérent entre les champs */
+.form-row {
+  gap: 0.75rem !important;
+  margin-bottom: 1rem;
+}
+
+/* Centrage des boutons */
+.card button {
+  align-self: center;
+  padding: 0.5rem 1.25rem;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+}
+
+.card button:hover {
+  transform: scale(1.05);
+}
+
+/* =====================================================
+   🏷️ TITRES
+===================================================== */
+h3 {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 1.75rem;
+  color: #0d6efd;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+h5 {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* =====================================================
+   📱 RESPONSIVE
+===================================================== */
+@media (max-width: 991px) {
+  .col-lg-4 {
+    flex: 0 0 48%;
+    max-width: 48%;
+  }
+}
+
+@media (max-width: 768px) {
+  .col-lg-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+

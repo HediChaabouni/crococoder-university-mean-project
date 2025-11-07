@@ -1,20 +1,21 @@
 import Class from '../models/Class.js';
+import User from '../models/User.js';
 
 // ➡️ Create Class
 export const createClass = async (req, res) => {
-    try {
-        const newClass = new Class({
-            className: req.body.className,
-            classYear: req.body.classYear,
-            teacherIds: req.body.teacherIds || [],
-            studentIds: req.body.studentIds || [],
-            courseIds: req.body.courseIds || []
-        });
-        await newClass.save();
-        res.status(201).json(newClass);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
-    }
+  try {
+    const newClass = new Class({
+      className: req.body.className,
+      classYear: req.body.classYear,
+      teacherIds: req.body.teacherIds || [],
+      studentIds: req.body.studentIds || [],
+      courseIds: req.body.courseIds || []
+    });
+    await newClass.save();
+    res.status(201).json(newClass);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 };
 
 // ➡️ Read all Classes
@@ -49,10 +50,11 @@ export const getClassByStudent = async (req, res) => {
     if (!student.classId) {
       return res.json({ class: null, classmates: [] });
     }
-
+    // 1️⃣ Trouver la classe du student
     const myClass = await Class.findById(student.classId);
+    // 2️⃣ Exclure l’étudiant lui-même de la liste des classmates
     const classmates = await User.find({ classId: student.classId, role: 'student', _id: { $ne: id } });
-
+    // 3️⃣ Retourner les 2 valeurs dans un seul objet JSON
     res.json({ class: myClass, classmates });
   } catch (e) {
     res.status(500).json({ message: e.message });

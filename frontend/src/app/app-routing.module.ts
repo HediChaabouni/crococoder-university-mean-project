@@ -21,7 +21,6 @@ import { TeacherEvalsComponent } from './components/features/teacher-evals/teach
 import { CourseFormComponent } from './components/features/course-form/course-form.component';
 import { EvalFormComponent } from './components/features/eval-form/eval-form.component';
 import { ProfileComponent } from './components/features/profile/profile.component';
-import { AuthGuard } from './core/guards/auth.guard';
 import { ParentEvalsComponent } from './components/features/parent-evals/parent-evals.component';
 import { TeachersComponent } from './components/features/teachers/teachers.component';
 import { AdminDashboardComponent } from './components/features/admin-dashboard/admin-dashboard.component';
@@ -34,6 +33,7 @@ import { TeacherClassesComponent } from './components/features/teacher-classes/t
 import { TeacherStudentsComponent } from './components/features/teacher-students/teacher-students.component';
 import { TeacherCoursesListComponent } from './components/features/teacher-courses-list/teacher-courses-list.component';
 import { TeacherEvalsListComponent } from './components/features/teacher-evals-list/teacher-evals-list.component';
+import { StudentTeachersComponent } from './components/features/student-teachers/student-teachers.component';
 
 const routes: Routes = [
   // Pages publiques
@@ -58,6 +58,7 @@ const routes: Routes = [
 
   // Parent paths spécifiques
   { path: 'parent-evals', component: ParentEvalsComponent }, // liste des evals pr parent pour child
+  { path: 'parent-children', component: ParentChildrenComponent }, // liste des enfants pr parent
 
   // Teachers, paths spécifiques
   { path: 'teachers', component: TeachersComponent }, // Liste de ts les cours, public et dashboards
@@ -67,7 +68,7 @@ const routes: Routes = [
   { path: 'teacher-students', component: TeacherStudentsComponent }, // liste des students du prof connecté 
 
   // Courses, paths spécifiques
-  // { path: 'courses', component: CoursesComponent }, // enduser view
+  { path: 'courses', component: CoursesComponent }, // enduser view
   { path: 'courses/new', component: CourseFormComponent }, // création d'un cours par le teacher
   { path: 'courses/edit/:id', component: CourseFormComponent }, // édition d'un cours par le teacher
 
@@ -112,9 +113,9 @@ const routes: Routes = [
     // canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'children', pathMatch: 'full' },
-      { path: 'children', component: ParentChildrenComponent },
-      { path: 'evals', component: ParentEvalsComponent },
-      { path: 'search', component: ParentSearchComponent },
+      { path: 'parent-children', component: ParentChildrenComponent },
+      { path: 'parent-evals', component: ParentEvalsComponent },
+      { path: 'parent-search', component: ParentSearchComponent },
       { path: 'profile', component: ProfileComponent }
     ]
   },
@@ -123,10 +124,11 @@ const routes: Routes = [
     component: StudentDashboardComponent,
     // canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: 'courses', pathMatch: 'full' },
-      { path: 'courses', component: StudentCoursesComponent },
-      { path: 'class', component: StudentClassComponent },
-      { path: 'evals', component: StudentEvalsComponent },
+      { path: '', redirectTo: 'student-courses', pathMatch: 'full' },
+      { path: 'student-courses', component: StudentCoursesComponent },
+      { path: 'student-teachers', component: StudentTeachersComponent },
+      { path: 'student-class', component: StudentClassComponent },
+      { path: 'student-evals', component: StudentEvalsComponent },
       { path: 'profile', component: ProfileComponent }
     ]
   },

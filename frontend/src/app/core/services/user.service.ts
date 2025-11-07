@@ -14,7 +14,7 @@ export class UserService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  // Crée un nouvel utilisateur
+  // Crée un nouvel utilisateur: student, teacher, parent, admin
   createUser(user: FormData, role: string): Observable<User> {
     return this.http.post<User>(`${this.userUrl}/signup-${role}`, user);
   }
@@ -66,6 +66,12 @@ export class UserService {
     return this.http.get<any[]>(`${this.userUrl}/teacher/${teacherId}/students`);
   }
 
+  // Récupère les teachers d’un student
+  getTeachersByStudent(studentId: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.userUrl}/student/${studentId}/teachers`);
+  }
+
+  // Récupère les children d’un parent
   getChildrenByParent(parentId: string): Observable<User[]> {
     return this.http.get<User[]>(`${this.userUrl}/parent/${parentId}/children`);
   }
@@ -85,9 +91,16 @@ export class UserService {
     return this.http.delete(this.userUrl);
   }
 
-  /** ✅ Recherche d’un enfant par nom complet OU par téléphone */
-  searchChild(query: string): Observable<User[]> {
-    return this.http.get<User[]>(`${this.userUrl}/search-child?query=${query}`);
+  // ✅ Recherche d’un enfant par nom complet OU par téléphone */
+  searchChild(query: string, parentId: string) {
+    return this.http.get<(User & { alreadyLinked?: 'you' | 'other' | null })[]>(`${this.userUrl}/search-child`, {
+      params: { query, parentId } // ✅ On passe le paramètre en ?query=&parentId=parentId
+    });
+  }
+
+  // ✅ Lier un enfant à un parent
+  linkChild(parentId: string, childId: string) {
+    return this.http.post<{ message: string }>(`${this.userUrl}/link-child`, { parentId, childId });
   }
 
   // ✅ Récupère l’utilisateur connecté depuis le localStorage
@@ -101,5 +114,6 @@ export class UserService {
     const user = this.getCurrentUser();
     return user ? `${user.firstName} ${user.lastName}` : '';
   }
+
 
 }

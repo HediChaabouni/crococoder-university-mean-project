@@ -43,7 +43,7 @@ export class StudentDashboardComponent implements OnInit {
     this.courseService.getCoursesByStudent(studentId).subscribe({
       next: (courses) => {
         this.stats.courses = courses.length;
-        // compter les enseignants uniques liés à ces cours
+    // 🟨 Teachers liés à ces cours
         const teachers = new Set(
           courses.flatMap((c: any) => c.teacherIds || [])
         );
@@ -52,7 +52,7 @@ export class StudentDashboardComponent implements OnInit {
       error: (err) => console.error('❌ Error loading student courses:', err)
     });
 
-    // 🟨 Evaluations
+    // 🟦 Evaluations
     this.evalService.getEvalsByStudent(studentId).subscribe({
       next: (evals) => (this.stats.evals = evals.length),
       error: (err) => console.error('❌ Error loading student evals:', err)

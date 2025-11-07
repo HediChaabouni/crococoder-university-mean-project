@@ -172,6 +172,26 @@ export const getStudentsByTeacher = async (req, res) => {
   }
 };
 
+// ✅ Récupère les teachers d’un student
+export const getTeachersByStudent = async (req, res) => {
+  try {
+    const studentId = req.params.id;
+    // Vérifier que l’étudiant existe
+    const student = await User.findById(studentId);
+    if (!student || student.role !== 'student') {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+    // Trouver les enseignants associés à cet étudiant
+    const teachers = await User.find({ studentIds: studentId, role: 'teacher' });
+    res.status(200).json(teachers);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching teachers', error: err });
+  }
+};
+
+
+
+
 /* ================================
    GET – Enfants d’un parent
    ================================ */
@@ -272,22 +292,116 @@ export const deleteAllUsers = async (req, res) => {
    ================================ */
 export const searchChild = async (req, res) => {
   try {
-    const query = req.query.query?.trim();
-    if (!query) return res.status(400).json({ message: 'Search query is required' });
 
-    // recherche par tel ou nom/prénom
+    const { query = '', parentId } = req.query;
+
+    if (!query.trim()) {
+      const ownChildren = await User.find({ _id: { $in: parent.childIds } })
+        .select('firstName lastName tel parentId');
+      return res.json(ownChildren);
+    }
+
+    if (!parentId) return res.status(401).json({ message: 'Unauthorized: parentId missing' });
+
+    // 1️⃣ Vérifier que le parent est légitime
+    const parent = await User.findById(parentId);
+    if (!parent || parent.role !== 'parent') {
+      return res.status(403).json({ message: 'Access denied: invalid parent' });
+    }
+
+    // 2️⃣ Construire la recherche
     const regex = new RegExp(query, 'i');
-    const children = await User.find({
+    const allMatches = await User.find({
       role: 'student',
       $or: [
         { tel: query },
         { firstName: regex },
         { lastName: regex }
       ]
-    });
+    }).select('firstName lastName tel parentId'); // on limite les champs pour alléger la réponse
 
-    res.json(children);
+    // 3️⃣ Annoter les résultats
+    const annotated = allMatches.map((child) => ({
+      ...child.toObject(),
+      alreadyLinked:
+        child.parentId?.toString() === parent._id.toString()
+          ? 'you'
+          : child.parentId
+            ? 'other'
+            : null
+    }));
+
+    // 4️⃣ Retourner les enfants triés :
+    //    - ceux déjà à toi en premier,
+    //    - puis ceux libres,
+    //    - puis ceux déjà pris.
+    const ordered = [
+      ...annotated.filter(c => c.alreadyLinked === 'you'),
+      ...annotated.filter(c => !c.alreadyLinked),
+      ...annotated.filter(c => c.alreadyLinked === 'other')
+    ];
+
+    res.json(ordered);
   } catch (e) {
     res.status(500).json({ message: e.message });
+  }
+};
+
+
+// ========================================================
+// 🔗 Link a child to a parent (by ID or by Tel)
+// ========================================================
+
+export const linkChild = async (req, res) => {
+  try {
+    const { parentId, childId } = req.body;
+
+    if (!parentId || !childId) {
+      return res.status(400).json({ message: 'parentId and childId are required' });
+    }
+
+    // 1️⃣ 2️⃣ Vérifier que le parent et enfant existent et ont bien les rôles "parent" et "student"
+    const [parent, child] = await Promise.all([
+      User.findById(parentId),
+      User.findById(childId)
+    ]);
+
+    if (!parent || parent.role !== 'parent') {
+      return res.status(403).json({ message: 'Invalid parent' });
+    }
+
+    if (!child || child.role !== 'student') {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+
+    // 3️⃣ ✅ Protection : si l’enfant est déjà lié à un autre parent
+    if (child.parentId && !child.parentId.equals(parent._id)) {
+      return res.status(409).json({ message: 'This student is already linked to another parent' });
+    }
+
+    // 4️⃣ (Facultatif mais utile) Si le parent a déjà ce child dans ses childIds
+    const alreadyLinked = parent.childIds.some(
+      (id) => id.toString() === child._id.toString()
+    );
+    if (alreadyLinked) {
+      return res.status(200).json({ message: 'This student is already linked to you' });
+    }
+
+    // 5️⃣ ✅ Tout est bon → mise à jour des deux côtés
+    await Promise.all([
+      User.findByIdAndUpdate(parent._id, { $addToSet: { childIds: child._id } }),
+      User.findByIdAndUpdate(child._id, { parentId: parent._id })
+    ]);
+
+    res.json({
+      message: 'Child successfully linked to parent',
+      linkedChild: {
+        _id: child._id,
+        firstName: child.firstName,
+        lastName: child.lastName
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };

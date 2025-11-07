@@ -8,11 +8,13 @@ import {
   getUsersByRole,
   getUserById,
   getStudentsByTeacher,
+  getTeachersByStudent,
   getChildrenByParent,
   updateUser,
   deleteUser,
   deleteAllUsers,
-  searchChild
+  searchChild,
+  linkChild
 } from '../controllers/userController.js';
 
 const router = express.Router();
@@ -55,19 +57,22 @@ router.post('/signup-admin', uploadFields, createUser);   // idem, safe
    ========================================== */
 router.get('/', getUsers);
 router.get('/role/:role', getUsersByRole);
-router.get('/:id', getUserById);
+router.get('/search-child', searchChild);
+router.post('/link-child', linkChild);
 router.get('/teacher/:id/students', getStudentsByTeacher);
+router.get('/student/:id/teachers', getTeachersByStudent)
 router.get('/parent/:id/children', getChildrenByParent);
+router.get('/:id', getUserById);        // ⚠️ Les dynamiques simples en dernier
 router.put('/:id', upload.none(), updateUser);
 router.delete('/:id', deleteUser);
 router.delete('/', deleteAllUsers);
 
 /* ==========================================
-   🔐 AUTH + SEARCH ROUTES
+   🔐 AUTH ROUTES
    ========================================== */
 router.post('/login', loginUser);
 router.post('/logout', (_req, res) => res.json({ message: 'User logged out successfully' }));
-router.get('/search-child', searchChild);
+
 
 export default router;
 

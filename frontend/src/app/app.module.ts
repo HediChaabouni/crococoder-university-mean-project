@@ -46,6 +46,7 @@ import { TeacherClassesComponent } from './components/features/teacher-classes/t
 import { TeacherCoursesListComponent } from './components/features/teacher-courses-list/teacher-courses-list.component';
 import { TeacherEvalsListComponent } from './components/features/teacher-evals-list/teacher-evals-list.component';
 import { CountUpPipe } from './core/pipes/count-up.pipe';
+import { StudentTeachersComponent } from './components/features/student-teachers/student-teachers.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { CountUpPipe } from './core/pipes/count-up.pipe';
     TeacherClassesComponent,
     TeacherCoursesListComponent,
     TeacherEvalsListComponent,
-    CountUpPipe
+    CountUpPipe,
+    StudentTeachersComponent
   ],
   imports: [
     BrowserModule,

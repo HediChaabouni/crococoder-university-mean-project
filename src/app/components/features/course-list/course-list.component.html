@@ -1,8 +1,0 @@
-<!-- course-list.component.html -->
-
-<div class="row mt-4">
-  <div *ngFor="let cr of courses" class="col-md-4">
-    <app-course-item [course]="cr" (delete)="deleteCourse.emit($event)" (edit)="editCourse.emit($event)">
-    </app-course-item>
-  </div>
-</div>
